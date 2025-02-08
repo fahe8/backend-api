@@ -15,7 +15,7 @@ export class ReservaRepository {
     const { fecha, horaInicio, horaFinal, canchaId } = reserva;
 
     const [result] = await pool.query(
-      "INSERT INTO reserva (fecha, hora_inicio, hora_final, cancha_id) VALUES (?, ?, ?, ?)",
+      "INSERT INTO reserva (fecha, horaInicio, horaFinal, canchaId) VALUES (?, ?, ?, ?)",
       [fecha, horaInicio, horaFinal, canchaId]
     );
     return result.insertId;

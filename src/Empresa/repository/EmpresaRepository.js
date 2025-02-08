@@ -11,10 +11,12 @@ export class EmpresaReporitory {
   }
 
   static async crearEmpresa(empresa) {
-    const [result] = pool.query(
-      "INSERT INTO empresa (id, nombre, horaApertura, horaCierre, activo, usuarioId) VALUES (?,?,?,?,?)",
-      [id, nombre, horaApertura, horaCierre, activo, usuarioId]
+    const { nombre, horaApertura, horaCierre, activo, usuarioId } = empresa;
+
+    const [result] = await pool.query(
+      "INSERT INTO empresa (nombre, horaApertura, horaCierre, activo, usuarioId) VALUES (?,?,?,?,?)",
+      [nombre, horaApertura, horaCierre, activo, usuarioId]
     );
-    return result;
+    return result.insertId;
   }
 }

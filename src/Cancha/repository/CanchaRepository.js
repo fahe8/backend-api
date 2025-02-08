@@ -15,7 +15,7 @@ export class CanchaRepository {
     const { nombre, activo, empresaId } = cancha;
 
     const [result] = await pool.query(
-      "INSERT INTO cancha (nombre, activo, empresa_id) VALUES (?, ?, ?)",
+      "INSERT INTO cancha (nombre, activo, empresaId) VALUES (?, ?, ?)",
       [nombre, activo, empresaId]
     );
     return result.insertId;
