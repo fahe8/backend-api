@@ -1,23 +1,16 @@
-import { pool } from "../../config/db.js";
+import { Reserva } from "../../models/Reserva.js";
 
 export class ReservaRepository {
   static async obtenerTodasReservas() {
-    const [rows] = await pool.query("SELECT * FROM reserva");
-    return rows;
+    return await Reserva.findAll(); // Equivalente a SELECT * FROM reserva con relaciones
   }
 
-  static async obtenerReservaPorId(id) {
-    const [rows] = await pool.query("SELECT * FROM reserva WHERE id = ?", [id]);
-    return rows[0];
+  static async obtenerReservaPorId(id_reserva) {
+    return await Reserva.findByPk(id_reserva);
   }
 
   static async crearReserva(reserva) {
-    const { fecha, horaInicio, horaFinal, canchaId } = reserva;
-
-    const [result] = await pool.query(
-      "INSERT INTO reserva (fecha, horaInicio, horaFinal, canchaId) VALUES (?, ?, ?, ?)",
-      [fecha, horaInicio, horaFinal, canchaId]
-    );
-    return result.insertId;
+    const nuevaReserva = await Reserva.create(reserva);
+    return nuevaReserva.id_reserva; // Retorna el ID de la reserva creada
   }
 }

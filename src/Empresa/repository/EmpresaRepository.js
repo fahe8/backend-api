@@ -1,22 +1,16 @@
-import { pool } from "../../config/db.js";
-export class EmpresaReporitory {
+import { Empresa } from "../../models/Empresa.js";
+
+export class EmpresaRepository {
   static async obtenerTodosEmpresa() {
-    const [rows] = await pool.query("SELECT * FROM empresa");
-    return rows;
+    return await Empresa.findAll(); // Equivalente a SELECT * FROM empresa
   }
 
-  static async obtenerEmpresaPorId(id) {
-    const [rows] = await pool.query("SELECT * FROM empresa WHERE id = ?", [id]);
-    return rows[0];
+  static async obtenerEmpresaPorId(id_empresa) {
+    return await Empresa.findByPk(id_empresa); // Equivalente a SELECT * FROM empresa WHERE id_empresa = ?
   }
 
   static async crearEmpresa(empresa) {
-    const { nombre, horaApertura, horaCierre, activo, usuarioId } = empresa;
-
-    const [result] = await pool.query(
-      "INSERT INTO empresa (nombre, horaApertura, horaCierre, activo, usuarioId) VALUES (?,?,?,?,?)",
-      [nombre, horaApertura, horaCierre, activo, usuarioId]
-    );
-    return result.insertId;
+    const nuevaEmpresa = await Empresa.create(empresa); // Crea una nueva empresa
+    return nuevaEmpresa.id_empresa; // Retorna el ID de la empresa creada
   }
 }
