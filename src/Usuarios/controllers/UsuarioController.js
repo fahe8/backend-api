@@ -10,15 +10,6 @@ export class UsuarioController {
     }
   }
 
-  static async iniciarSesion(req, res) {
-    try {
-      const usuario = await UsuarioService.iniciarSesion(req.body);
-      res.json(usuario);
-    } catch (error) {
-      res.status(500).json({ message: "Error al obtener el usuario" });
-    }
-  }
-
   static async crearUsuario(req, res) {
     try {
       const usuarioId = await UsuarioService.crearUsuario(req.body);

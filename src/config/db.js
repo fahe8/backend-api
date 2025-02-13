@@ -9,8 +9,9 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   dialect: "mysql",
   port: DB_PORT,
   dialectOptions: {
-    ssl: false, // Cambia esto si necesitas SSL
+    ssl: false,
   },
+  logging: false,
 });
 
 export default sequelize;
