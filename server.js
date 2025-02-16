@@ -7,10 +7,12 @@ import routerReserva from "./src/Reserva/routes/ReservaRoutes.js";
 import routerAuth from "./src/Auth/routes/AuthRoutes.js";
 import sequelize from "./src/config/db.js";
 import iniciarAsociaciones from "./src/config/asociaciones.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 // Rutas
 app.use("/api/usuarios", routerUsuarios);
